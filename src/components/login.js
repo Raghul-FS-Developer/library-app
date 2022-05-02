@@ -68,7 +68,7 @@ function Login({myStorage ,setLogged}) {
                   
                   </div>
                   
-                  <p className='text-danger' style={{width:'150px',margin:0}} >{msg}</p>
+                  <p className='text-danger' style={{margin:0}} >{msg}</p>
                   <a href='#' style={{width:'140px' ,float:'right'}} onClick={()=>navigate('/forgot')}>forgot password?</a>
                 
                   <div className="mt-3">
