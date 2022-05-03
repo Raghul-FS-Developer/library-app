@@ -302,7 +302,7 @@ const submit =async(e)=>{
             <input
               className="form-control mr-sm-2"
               type="text"
-              placeholder="Find Book Links..."
+              placeholder="Find Book Title..."
               onChange={(e)=>setTitle(e.target.value)}
             />
             <button className="btn btn-outline-info my-2 my-sm-0" type="submit">
