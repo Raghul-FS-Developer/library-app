@@ -74,7 +74,7 @@ function Addbook({ myStorage }) {
                 type="text"
                 id="password"
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Enter the Book name"
+                placeholder="Enter the title name"
                 required
               />
             </div>
