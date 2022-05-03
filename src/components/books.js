@@ -30,7 +30,7 @@ function Books() {
                 <th scope="col">#</th>
                 <th scope="col">Category</th>
                 <th scope="col">Author</th>
-                <th scope="col">Book Name</th>
+                <th scope="col">Title</th>
                 <th scope="col">Book</th>
                 <th scope="col">CreatedBy</th>
                 <th scope="col">CreatedAt</th>

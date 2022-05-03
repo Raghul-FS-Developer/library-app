@@ -79,7 +79,7 @@ function Editbook() {
             </div>
             <div className="mb-2 ">
               <label className="form-label" htmlFor="password">
-                Book Name
+                Title
               </label>
               <input
                 className="form-control"
