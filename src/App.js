@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Register from "./components/register";
 import Navbar from "./components/navbar";
 import Books from "./components/books";
@@ -27,51 +27,49 @@ import Forgotconfirm from "./components/subcomp/forgotconfirm";
 function App() {
 
   const myStorage = window.localStorage;
-  const [logged, setLogged] = useState(myStorage.getItem("user"));
+  const logged = myStorage.getItem("user");
   const [findbook,setFindbook] =useState()
  
-
+console.log(logged)
   return (
     <div>
-      <Navbar myStorage={myStorage} logged={logged} setLogged={setLogged} setFindbook={setFindbook}/>
+      <Navbar myStorage={myStorage} logged={logged}  setFindbook={setFindbook}/>
       <Routes>
-        <Route path='/' element={<Home  myStorage={myStorage}/>}/>
-        {!logged && (
-          <>
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot" element={<Forgot/>}/>
-        <Route path="/confirm/:token" element={<Forgotconfirm/>}/>
+        <Route path='/' element={logged ? <Home  myStorage={myStorage}/> : <Navigate to = "/login"/> }/>
+       
+         
+        <Route path="/register" element={logged ? <Navigate to = "/"/>: <Register />} />
+        <Route path="/forgot" element={logged ?<Navigate to = "/"/>:<Forgot/>}/>
+        <Route path="/confirm/:token" element={logged ?<Navigate to = "/"/>:<Forgotconfirm/>}/>
         <Route
           path="/login"
-          element={<Login myStorage={myStorage} setLogged={setLogged} />}
+          element={logged? <Navigate to = "/"/>:<Login logged={logged} myStorage={myStorage} />}
         />
-        <Route path="/register-confirm/:token" element={<RegisterConfirm />} />
-        </>
-        )}
-        {logged && (
-          <>
-            <Route path="/books" element={<Books />} />
+        <Route path="/register-confirm/:token" element={logged? <Navigate to = "/"/>:<RegisterConfirm />} />
+    
+       
+        
+            <Route path="/books" element={logged?<Books />:<Navigate to = "/login"/>} />
             <Route
               path="/addbook"
-              element={<Addbook myStorage={myStorage} />}
+              element={logged?<Addbook myStorage={myStorage} />:<Navigate to = "/login"/>}
             />
             <Route
               path="/mybooks"
-              element={<Mybooks myStorage={myStorage} />}
+              element={logged?<Mybooks myStorage={myStorage}/>:<Navigate to = "/login"/>}
             />
-            <Route path="/edit-book/:id" element={<Editbook />} />
-            <Route path="/findbook" element={<Findbook findbook={findbook}/>} />
-            <Route path="/profile" element={<Profile myStorage={myStorage}/>} />
-            <Route path="/userlist" element={<Userlist myStorage={myStorage}/>} />
-            <Route path="/update-profile" element={<Update myStorage={myStorage}/>} />
-            <Route path="/totalbooks" element={<Totalbooks myStorage={myStorage} />} />
-            <Route path="/category" element={<Category />} />
-            <Route path="/category/comics" element={<Comics />} />
-            <Route path="/category/history" element={<History />} />
-            <Route path="/category/politics" element={<Politics />} />
+            <Route path="/edit-book/:id" element={logged?<Editbook />:<Navigate to = "/login"/>} />
+            <Route path="/findbook" element={logged?<Findbook findbook={findbook}/>:<Navigate to = "/login"/>} />
+            <Route path="/profile" element={logged?<Profile myStorage={myStorage}/>:<Navigate to = "/login"/>} />
+            <Route path="/userlist" element={logged?<Userlist myStorage={myStorage}/>:<Navigate to = "/login"/>} />
+            <Route path="/update-profile" element={logged?<Update myStorage={myStorage}/>:<Navigate to = "/login"/>} />
+            <Route path="/totalbooks" element={logged?<Totalbooks myStorage={myStorage} />:<Navigate to = "/login"/>} />
+            <Route path="/category" element={logged?<Category />:<Navigate to = "/login"/>} />
+            <Route path="/category/comics" element={logged?<Comics />:<Navigate to = "/login"/>} />
+            <Route path="/category/history" element={logged?<History />:<Navigate to = "/login"/>} />
+            <Route path="/category/politics" element={logged?<Politics />:<Navigate to = "/login"/>} />
            
-          </>
-        )}
+        
       </Routes>
     </div>
   );

@@ -6,7 +6,7 @@ import { BiBookAdd, BiLibrary } from "react-icons/bi";
 import URL from '../db'
 import axios from "axios";
 
-function Navbar({ logged, myStorage, setLogged ,setFindbook}) {
+function Navbar({ logged, myStorage,setFindbook}) {
   let user = myStorage.getItem("user");
   let navigate = useNavigate();
 
@@ -23,8 +23,8 @@ const submit =async(e)=>{
 //-->
   let logout = () => {
     myStorage.removeItem("user");
-    setLogged(null);
-    navigate("/login");
+   window.location.reload()
+    // navigate("/login");
   };
   const handleDeleteuser=async()=>{
    if(user){
@@ -32,11 +32,11 @@ const submit =async(e)=>{
    if(ok){
     let username = user
     let res = await  axios.delete(`${URL}deleteuser/${username}`)
-    console.log(res)
+
     if(res.data.statuscode === 200){
-      setLogged(null)
+      myStorage.removeItem("user");
       alert('User Deleted Successfully')
-      navigate('/login')
+      // navigate('/login')
     }
    }
    }else{
@@ -221,7 +221,7 @@ const submit =async(e)=>{
               </div>
             </li>
             {/* List menu items */}
-            {logged && (
+            {logged ? (
               <>
                 <li className="nav-item">
                   <a
@@ -240,10 +240,9 @@ const submit =async(e)=>{
                   </a>
                 </li>
               </>
-            )}
-            {/* Login Register */}
-            {!logged && (
-              <>
+            
+            ):
+              (<>
                 <li className="nav-item">
                   <a
                     className="nav-link bts"

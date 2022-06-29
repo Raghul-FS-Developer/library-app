@@ -4,7 +4,7 @@ import '../App.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
-function Login({myStorage ,setLogged}) {
+function Login({myStorage ,logged}) {
  
   const navigate = useNavigate()
 
@@ -18,8 +18,9 @@ function Login({myStorage ,setLogged}) {
    
   if(res.data.statuscode === 200){
      myStorage.setItem('user',res.data.username)
-     setLogged(true)
-     navigate('/')
+     window.location.reload()
+    //  navigate('/')
+
   }else{
     setMsg(res.data.message)
   } 
