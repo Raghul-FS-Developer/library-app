@@ -36,6 +36,7 @@ const submit =async(e)=>{
     if(res.data.statuscode === 200){
       myStorage.removeItem("user");
       alert('User Deleted Successfully')
+      window.location.reload()
       // navigate('/login')
     }
    }

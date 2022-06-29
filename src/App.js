@@ -35,7 +35,7 @@ console.log(logged)
     <div>
       <Navbar myStorage={myStorage} logged={logged}  setFindbook={setFindbook}/>
       <Routes>
-        <Route path='/' element={logged ? <Home  myStorage={myStorage}/> : <Navigate to = "/login"/> }/>
+        <Route path='/' element={<Home  myStorage={myStorage}/>}/>
        
          
         <Route path="/register" element={logged ? <Navigate to = "/"/>: <Register />} />
