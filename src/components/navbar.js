@@ -80,7 +80,7 @@ const submit =async(e)=>{
     }
   }
   return (
-    <header>
+    <header style={{position:"sticky",top:0}}>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <a className="navbar-brand text-white ss" to="/">
           <BiLibrary /> Library
