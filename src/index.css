@@ -4,10 +4,11 @@
   height:calc(100vh - 56px);
   object-fit:cover;
   object-position: top;
+
   
 }.second{
   position:absolute;
-  /* top: 150px; */
+  top: 150px;
   margin-top: 100px;
   right: 0;
   left: 0;
@@ -25,6 +26,7 @@
 .imp{
   display: flex;
   justify-content: center;
+
 
 }.total{
   text-align: center;
