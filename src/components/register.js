@@ -2,22 +2,24 @@ import React ,{useState} from 'react'
 import axios from 'axios'
 import '../App.css' 
 import URL from '../db'
+import {ToastContainer,toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 function Register() {
  
   const[username,setUsername]=useState('')
   const[email,setEmail]=useState('')
   const[password,setpassword]=useState('')
-  const[msg,setMsg]=useState('')
-
+  
   const handleSubmit=async(e)=>{
     e.preventDefault()
+    const id = toast.loading("please wait")
   let res = await axios.post(`${URL}register`,{username:username,email:email,password:password})
    
 
   if(res.data.statuscode === 200){
-    alert('check your mail for verification link')
+    toast.update(id,{render:'check your mail for verification link',type:"success",isLoading:false,autoClose:true,closeButton:true})
   }else{
-    setMsg(res.data.message)
+    toast.update(id,{render:res.data.message,type:"error",isLoading:false,autoClose:true,closeButton:true})
   }
 }
 
@@ -26,7 +28,7 @@ function Register() {
     <>
     
      <div className="details">
-     
+     <ToastContainer/>
     <div className="card-body">
       
               <div className="text-center">
@@ -75,7 +77,7 @@ function Register() {
                     />
                   
                   </div>
-                  <p className='text-danger'>{msg}</p>
+
                   <div className="">
                     <button
                       className="btn btn-outline-info"

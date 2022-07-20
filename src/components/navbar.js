@@ -5,6 +5,8 @@ import { CgProfile } from "react-icons/cg";
 import { BiBookAdd, BiLibrary } from "react-icons/bi";
 import URL from '../db'
 import axios from "axios";
+import {ToastContainer,toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 function Navbar({ logged, myStorage,setFindbook}) {
   let user = myStorage.getItem("user");
@@ -35,13 +37,13 @@ const submit =async(e)=>{
 
     if(res.data.statuscode === 200){
       myStorage.removeItem("user");
-      alert('User Deleted Successfully')
+      toast.success('User Deleted Successfully')
       window.location.reload()
       // navigate('/login')
     }
    }
    }else{
-     alert('If you want to access this functionality you should login first')
+    toast.warn('You should login first')
      navigate('/login')
    }
     
@@ -50,7 +52,7 @@ const submit =async(e)=>{
     if(user){
       navigate("/category")
     }else{
-      alert('If you want to access this functionality you should login first')
+      toast.warn('You should login first')
      navigate('/login')
     }
   }
@@ -59,7 +61,7 @@ const submit =async(e)=>{
     if(user){
       navigate("/update-profile")
     }else{
-      alert('If you want to access this functionality you should login first')
+      toast.warn('You should login first')
      navigate('/login')
     }
   }
@@ -67,7 +69,7 @@ const submit =async(e)=>{
     if(user){
       navigate("/totalbooks")
     }else{
-      alert('If you want to access this functionality you should login first')
+      toast.warn('You should login first')
      navigate('/login')
     }
   }
@@ -75,12 +77,13 @@ const submit =async(e)=>{
     if(user){
       navigate("/userlist")
     }else{
-      alert('If you want to access this functionality you should login first')
+      toast.warn('You should login first')
      navigate('/login')
     }
   }
   return (
     <header >
+      <ToastContainer/>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <a className="navbar-brand text-white ss" to="/">
           <BiLibrary /> Library

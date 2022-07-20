@@ -3,6 +3,8 @@ import URL from '../db'
 import '../App.css' 
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import {ToastContainer,toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login({myStorage ,logged}) {
  
@@ -10,19 +12,21 @@ function Login({myStorage ,logged}) {
 
   const[username,setUsername]=useState('')
   const[password,setpassword]=useState('')
-  const[msg,setMsg]=useState('')
+
 
   const handleSubmit=async(e)=>{
     e.preventDefault()
+   const id =  toast.loading("Checking credential")
     let res = await axios.post(`${URL}login`,{username:username,password:password})
    
   if(res.data.statuscode === 200){
-     myStorage.setItem('user',res.data.username)
+    let data = res.data.username
+     myStorage.setItem('user',data)
      window.location.reload()
     //  navigate('/')
-
+     
   }else{
-    setMsg(res.data.message)
+    toast.update(id,{render:res.data.message,type:"error",isLoading:false,autoClose:true,closeButton:true})
   } 
   
   }
@@ -32,7 +36,7 @@ function Login({myStorage ,logged}) {
     <>
     
      <div className="details">
-     
+     <ToastContainer/>
     <div className="card-body">
       
               <div className="text-center">
@@ -69,7 +73,7 @@ function Login({myStorage ,logged}) {
                   
                   </div>
                   
-                  <p className='text-danger' style={{margin:0}} >{msg}</p>
+
                   <a href='#' style={{width:'140px' ,float:'right'}} onClick={()=>navigate('/forgot')}>forgot password?</a>
                 
                   <div className="mt-3">
