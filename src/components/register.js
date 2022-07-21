@@ -12,12 +12,12 @@ function Register() {
   
   const handleSubmit=async(e)=>{
     e.preventDefault()
-    const id = toast.loading("please wait")
+    const id = toast.loading("please wait...")
   let res = await axios.post(`${URL}register`,{username:username,email:email,password:password})
    
 
   if(res.data.statuscode === 200){
-    toast.update(id,{render:'check your mail for verification link',type:"success",isLoading:false,autoClose:true,closeButton:true})
+    toast.update(id,{render:'Check your mail for verification link',type:"success",isLoading:false,autoClose:true,closeButton:true})
   }else{
     toast.update(id,{render:res.data.message,type:"error",isLoading:false,autoClose:true,closeButton:true})
   }
