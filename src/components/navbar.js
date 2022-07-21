@@ -179,7 +179,7 @@ const submit =async(e)=>{
                             style={{ fontSize: "1.5rem" }}
                           ></i>
                           <FaClipboardList />
-                          List of user
+                          List of users
                           <hr />
                         </li>
                         
