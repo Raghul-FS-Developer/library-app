@@ -4,20 +4,21 @@ import { useParams } from 'react-router-dom'
 
 import { useNavigate } from 'react-router-dom'
 import URL from '../../db'
-
+import {ToastContainer,toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 function Forgotconfirm() {
 
 const navigate=useNavigate()
 
 const params=useParams()
 
-const[msg,setMsg]=useState("")
+
 const[password,setPassword]=useState("")
 const[newpassword,setNewpassword]=useState("")
 
  let handleSubmit=async(e)=>{
    e.preventDefault()
-    
+    const id  = toast.loading('Please wait...')
     if(password === newpassword){
         
        let res = await axios.post(`${URL}verify/${params.token}`,{
@@ -26,21 +27,22 @@ const[newpassword,setNewpassword]=useState("")
 
     if(res.data.statuscode==200){
      
-     alert("password changed successfully")
-     navigate("/login")
+      toast.update(id,{render:"password changed successfully",isLoading:false,type:'error',autoClose:true,closeButton:true})
+       setTimeout(()=>navigate("/login"),2000)
     
     }else{
-        setMsg(res.data.message)
+       
+        toast.update(id,{render:res.data.message,isLoading:false,type:'error',autoClose:true,closeButton:true})
     }
 }else{
-     setMsg("Password Doesn't Match")
+     toast.update(id,{render:"Password Doesn't Match",isLoading:false,type:'error',autoClose:true,closeButton:true,delay:1000})
     }
 }
 
   return (
     <>
   <div className="details">
-     
+     <ToastContainer autoClose={2000}/>
      <div className="card-body">
        
                <div className="text-center">
@@ -75,7 +77,7 @@ const[newpassword,setNewpassword]=useState("")
                        placeholder='Enter Your Confirm Password'
                      />
                    </div>
-                   <p className='text-danger'>{msg}</p>                   
+               
                    <div className="">
                      <button
                        className="btn btn-outline-info"
