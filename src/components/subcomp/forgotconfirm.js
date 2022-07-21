@@ -27,7 +27,7 @@ const[newpassword,setNewpassword]=useState("")
 
     if(res.data.statuscode==200){
      
-      toast.update(id,{render:"password changed successfully",isLoading:false,type:'error',autoClose:true,closeButton:true})
+      toast.update(id,{render:"password changed successfully",isLoading:false,type:'success',autoClose:true,closeButton:true})
        setTimeout(()=>navigate("/login"),2000)
     
     }else{
