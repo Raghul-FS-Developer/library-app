@@ -11,6 +11,7 @@ Packages I Used..!<br/>
 
 Axios<br/>
 React Icons<br/>
+react-toastify<br/>
 React Router Dom<br/>
 Bcryptjs<br/>
 cors<br/>
